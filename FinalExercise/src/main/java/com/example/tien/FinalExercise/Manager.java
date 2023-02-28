@@ -12,7 +12,7 @@ public class Manager extends Employee{
     @Override
     public long Salary() {
         if(getOvertime()>0)
-            return 1500*getDay() + 300;
+            return 1500000*getDay() + 300000;
         else
             return 1500000*getDay();
 
@@ -32,5 +32,24 @@ public class Manager extends Employee{
     @Override
     public void InputInfo(int id, int pos) {
         super.InputInfo(id, pos);
+    }
+
+    @Override
+    public String Highest(Employee[] employees) {
+        double compare = 0;
+        String result = "";
+//        for(int i = 0; i < employees.length; i++){
+//            if(employees[i].getPosition() != 1){
+//                compare = employees[i].Salary();
+//                break;
+//            }
+//        }
+        for(int i = 0; i < employees.length; i++){
+            if(compare < employees[i].Salary() && employees[i].getPosition() != 1){
+                compare = employees[i].Salary();
+                result = "The person with the highest salary is " + employees[i].getName() + " with: " + employees[i].Salary()+" vnd";
+            }
+        }
+        return result;
     }
 }

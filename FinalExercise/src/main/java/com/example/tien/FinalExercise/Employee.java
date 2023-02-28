@@ -91,4 +91,7 @@ public class Employee {
         System.out.println("Do overtime?(0 or 1): ");
         Overtime = scanner.nextInt();
     }
+    public String Highest(Employee[] employees){
+        return "";
+    }
 }

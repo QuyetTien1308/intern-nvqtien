@@ -1,5 +1,7 @@
 package com.example.tien.FinalExercise;
 
+import com.example.tien.FinalExercise.File.ReadFile;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -10,8 +12,9 @@ public class Main {
         System.out.println("Input number employee:");
         int number = scanner.nextInt();
         Employee[] employees = new Employee[number];
+        ReadFile readFile = new ReadFile();
         for(int i = 0; i < number; i++){
-            System.out.println("Input employees" +(i+1));
+            System.out.println("Input employees " + (i+1));
             System.out.println("Choose Position: \n 1: Manager \n 2: Accountant \n 3: Receptionist \n 4: SanitationWorker \n 5: Engineer");
             int pos = scanner.nextInt();
             switch (pos){
@@ -52,12 +55,19 @@ public class Main {
             }
 
         }
+
         System.out.println("Choose ID position employee: ");
         int choose = scanner.nextInt();
         switch (choose){
             case 1:{
                 Manager manager = new Manager();
                 manager.ListEmployee(employees);
+                String highesMananager = manager.Highest(employees);
+                if(highesMananager.equals("")){
+                    System.out.println("Don't have employee");
+                }
+                else
+                    System.out.println(highesMananager);
                 break;
             }
             case 2:{
@@ -90,6 +100,13 @@ public class Main {
                 break;
             }
 
+        }
+        System.out.println("Choose: \n 1:ReadFile \n 2:WriteFile ");
+        int x = scanner.nextInt();
+        switch (x){
+            case 1: {
+                readFile.readFile();
+            }
         }
 
     }
