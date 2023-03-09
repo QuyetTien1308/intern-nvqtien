@@ -2,17 +2,22 @@ package com.example.tien.Final.service;
 
 import com.example.tien.Final.Dto.PositionDto;
 import com.example.tien.Final.entity.Position;
+import com.example.tien.Final.entity.User;
 import com.example.tien.Final.repos.PositionRepository;
+import com.example.tien.Final.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PositionService {
     @Autowired
     private PositionRepository positionRepository;
+    @Autowired
+    private UserRepository userRepository;
     public List<PositionDto> getPosition(){
         List<Position> positions=positionRepository.findAll();
         List<PositionDto> positionDtos=new ArrayList<>();
@@ -64,4 +69,9 @@ public class PositionService {
         return positionDto;
 
     }
+
+
+
+
+
 }

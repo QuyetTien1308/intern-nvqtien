@@ -27,9 +27,10 @@ public class UserController {
         return service.saveUser(user);
     }
 
-    @PutMapping("/updateUser")
-    private User updateUser(@RequestBody User user){
-        return service.updateUser(user);
+    @PutMapping("/updateUser/{id}")
+    private UserDto updateUser(@PathVariable int id ,@RequestBody UserDto userDto){
+        userDto.setId(id);
+        return service.updateUser(userDto);
     }
     @DeleteMapping("/deleteUser/{id}")
     private String deleteUser(@PathVariable int id){

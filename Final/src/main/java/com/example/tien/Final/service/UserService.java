@@ -4,6 +4,7 @@ import com.example.tien.Final.Dto.PositionDto;
 import com.example.tien.Final.Dto.UserDto;
 import com.example.tien.Final.entity.Position;
 import com.example.tien.Final.entity.User;
+import com.example.tien.Final.repos.PositionRepository;
 import com.example.tien.Final.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,18 +16,20 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private PositionService positionService;
     public List<UserDto> getUser(){
-
         List<User> users = userRepository.findAll();
         List<UserDto> userDtos = new ArrayList<>();
         for(User user : users){
+
             UserDto userDto = UserDto.builder()
+                    .id(user.getId())
                     .username(user.getUsername())
                     .password(user.getPassword())
                     .name(user.getName())
-                    .positionId(user.getId())
+                    .positionId(user.getPosition().getId())
                     .build();
             userDtos.add(userDto);
         }
@@ -52,6 +55,7 @@ public class UserService {
     public User saveUser(UserDto userDto){
         Position position = positionService.getPositionById(userDto.getPositionId());
         User user = User.builder()
+
                 .username(userDto.getUsername())
                 .password(userDto.getPassword())
                 .name(userDto.getName())
@@ -66,15 +70,25 @@ public class UserService {
         userRepository.deleteById(id);
         return "User removed !!" + id;
     }
-    public User updateUser(User User){
-
-        User existUser = userRepository.findById(User.getId()).orElse(null);
-        existUser.setName(User.getName());
-        existUser.setUsername(User.getUsername());
-        existUser.setPassword(User.getPassword());
-        existUser.setPosition(User.getPosition());
-
-//        existUser.setUser(User.getUser());
-        return userRepository.save(existUser);
+//    public User updateUser(User User){
+//
+//        User existUser = userRepository.findById(User.getId()).orElse(null);
+//        existUser.setName(User.getName());
+//        existUser.setUsername(User.getUsername());
+//        existUser.setPassword(User.getPassword());
+//        existUser.setPosition(User.getPosition());
+//
+////        existUser.setUser(User.getUser());
+//        return userRepository.save(existUser);
+//    }
+    public UserDto updateUser(UserDto userDto){
+        Position position = positionService.getPositionById(userDto.getPositionId());
+        User user = userRepository.findById(userDto.getId()).orElseThrow(()-> new RuntimeException("User Not Found"));
+        user.setUsername(userDto.getUsername());
+        user.setPassword(userDto.getPassword());
+        user.setName(userDto.getName());
+        user.setPosition(position);
+        userRepository.save(user);
+        return userDto;
     }
 }
