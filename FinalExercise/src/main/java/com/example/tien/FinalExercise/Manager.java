@@ -1,6 +1,6 @@
 package com.example.tien.FinalExercise;
 
-public class Manager extends Employee{
+public class        Manager extends Employee{
     public Manager(){
         super();
     }
