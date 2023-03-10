@@ -6,6 +6,7 @@ import com.example.tien.Final.entity.User;
 import com.example.tien.Final.repos.UserRepository;
 import com.example.tien.Final.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,4 +37,10 @@ public class UserController {
     private String deleteUser(@PathVariable int id){
         return service.deleteUser(id);
     }
+
+//    @DeleteMapping("/users")
+//    private ResponseEntity<String> deleteAll(){
+//        service.deleteAllUser();
+//        return ResponseEntity.ok("Delete all user!!");
+//    }
 }

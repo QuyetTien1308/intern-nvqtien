@@ -4,13 +4,14 @@ import com.example.tien.Final.Dto.PositionDto;
 import com.example.tien.Final.entity.Position;
 import com.example.tien.Final.entity.User;
 import com.example.tien.Final.repos.PositionRepository;
+
 import com.example.tien.Final.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class PositionService {
@@ -18,6 +19,9 @@ public class PositionService {
     private PositionRepository positionRepository;
     @Autowired
     private UserRepository userRepository;
+//    public List<Position> getAllPosition() {
+//        return positionRepository.findAll();
+//    }
     public List<PositionDto> getPosition(){
         List<Position> positions=positionRepository.findAll();
         List<PositionDto> positionDtos=new ArrayList<>();
@@ -32,7 +36,7 @@ public class PositionService {
         return positionDtos;
     }
     public Position getPositionById(int id){
-        return positionRepository.findById(id).orElse(null);
+        return positionRepository.findById(id).orElseThrow(()-> new RuntimeException("Error"));
     }
     public Position getPositionByName(String name){
         return positionRepository.findAllByName(name);
@@ -69,6 +73,10 @@ public class PositionService {
         return positionDto;
 
     }
+
+//    public void deleteAllPosition(){
+//        positionRepository.deleteAll();
+//    }
 
 
 

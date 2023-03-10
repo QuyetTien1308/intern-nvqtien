@@ -2,6 +2,7 @@ package com.example.tien.Final.service;
 
 import com.example.tien.Final.Dto.PositionDto;
 import com.example.tien.Final.Dto.UserDto;
+import com.example.tien.Final.entity.Attendance;
 import com.example.tien.Final.entity.Position;
 import com.example.tien.Final.entity.User;
 import com.example.tien.Final.repos.PositionRepository;
@@ -16,9 +17,14 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private PositionService positionService;
+    @Autowired
+    private AttendanceService attendanceService;
+
+//    public List<User> getAllUser() {
+//        return userRepository.findAll();
+//    }
     public List<UserDto> getUser(){
         List<User> users = userRepository.findAll();
         List<UserDto> userDtos = new ArrayList<>();
@@ -54,12 +60,13 @@ public class UserService {
     }
     public User saveUser(UserDto userDto){
         Position position = positionService.getPositionById(userDto.getPositionId());
+//        Attendance attendance = attendanceService.getAttendanceById(userDto.getAttendanceId());
         User user = User.builder()
-
                 .username(userDto.getUsername())
                 .password(userDto.getPassword())
                 .name(userDto.getName())
                 .position(position)
+//                .attendance(attendance)
                 .build();
         return userRepository.save(user);
     }
@@ -91,4 +98,8 @@ public class UserService {
         userRepository.save(user);
         return userDto;
     }
+
+//    public void deleteAllUser(){
+//        userRepository.deleteAll();
+//    }
 }
