@@ -17,7 +17,7 @@ public class PositionController {
         return service.getPosition();
     }
     @GetMapping("/Position/{id}")
-    private Position findAllById(@PathVariable int id){
+    private Position findAllById(@PathVariable Long id){
         return service.getPositionById(id);
     }
     @GetMapping("/position/{name}")
@@ -34,12 +34,12 @@ public class PositionController {
         return service.savePositions(positions);
     }
     @PutMapping("/updatePosition/{id}")
-    private PositionDto updatePosition(@PathVariable int id ,@RequestBody PositionDto positionDto){
+    private PositionDto updatePosition(@PathVariable Long id ,@RequestBody PositionDto positionDto){
         positionDto.setId(id);
         return service.updatePosition(positionDto);
     }
     @DeleteMapping("/deletePosition/{id}")
-    private String deletePosition(@PathVariable int id){
+    private String deletePosition(@PathVariable Long id){
         return service.deletePosition(id);
     }
 //    @DeleteMapping("/positions")

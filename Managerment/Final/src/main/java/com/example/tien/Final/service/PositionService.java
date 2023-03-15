@@ -33,7 +33,7 @@ public class PositionService {
         }
         return positionDtos;
     }
-    public Position getPositionById(int id){
+    public Position getPositionById(Long id){
         return positionRepository.findById(id).orElseThrow(()-> new RuntimeException("Error"));
     }
     public Position getPositionByName(String name){
@@ -52,7 +52,7 @@ public class PositionService {
     public List<Position> savePositions(List<Position> positions){
         return positionRepository.saveAll(positions);
     }
-    public String deletePosition(int id){
+    public String deletePosition(Long id){
         positionRepository.deleteById(id);
         return "Position removed !!" + id;
     }

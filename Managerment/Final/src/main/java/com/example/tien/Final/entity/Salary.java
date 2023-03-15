@@ -3,6 +3,8 @@ package com.example.tien.Final.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,12 +17,15 @@ public class Salary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private double baseSalary;
+    private BigDecimal baseSalary;
     @Column(nullable = false)
-    private double overtimeSalary;
-    @Column(name = "days_worked")
-    private int daysWorked;
+    private BigDecimal overtimeSalary;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "position_id")
+    private Position position;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+    @Column(name = "days_worked")
+    private int daysWorked;
 }

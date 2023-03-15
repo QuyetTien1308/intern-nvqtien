@@ -9,11 +9,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeDto {
-    private int id;
+    private Long id;
     private String username;
     private String password;
     private String name;
 
-    private int positionId;
-    private SalaryDto salaryId;
+    private Long positionId;
+    private Long salaryId;
 }

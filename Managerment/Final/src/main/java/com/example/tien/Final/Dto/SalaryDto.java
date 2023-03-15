@@ -3,6 +3,8 @@ package com.example.tien.Final.Dto;
 import jakarta.persistence.Column;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Builder
@@ -10,7 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 public class SalaryDto {
     private Long id;
-    private double baseSalary;
+    private BigDecimal baseSalary;
     private int daysWorked;
-    private double overtimeSalary;
+    private BigDecimal overtimeSalary;
+    private Long positionId;
 }

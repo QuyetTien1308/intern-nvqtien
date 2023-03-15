@@ -35,6 +35,7 @@ public class EmployeeService {
                     .password(employee.getPassword())
                     .name(employee.getName())
                     .positionId(employee.getPosition().getId())
+//                    .salaryId(employee.getSalaries())
                     .build();
             Position position = positionRepository.findById(employee.getPosition().getId()).orElseThrow(() -> new RuntimeException("Position not found"));
             PositionDto positionDto = PositionDto.builder()
