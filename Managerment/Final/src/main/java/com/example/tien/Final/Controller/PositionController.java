@@ -2,7 +2,7 @@ package com.example.tien.Final.Controller;
 
 import com.example.tien.Final.Dto.PositionDto;
 import com.example.tien.Final.entity.Position;
-import com.example.tien.Final.service.PositionService;
+import com.example.tien.Final.service.impl.PositionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 public class PositionController {
     @Autowired
-    private PositionService service;
+    private PositionServiceImpl service;
     @GetMapping("/Positions")
     private List<PositionDto> findAllPosition(){
         return service.getPosition();
