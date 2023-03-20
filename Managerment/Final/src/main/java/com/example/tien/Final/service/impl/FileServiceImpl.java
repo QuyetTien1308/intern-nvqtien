@@ -1,9 +1,11 @@
 package com.example.tien.Final.service.impl;
 
+import com.example.tien.Final.Dto.EmployeeDto;
 import com.example.tien.Final.entity.Employee;
 import com.example.tien.Final.entity.Position;
 import com.example.tien.Final.repos.EmployeeRepository;
 import com.example.tien.Final.repos.FileReponsitory;
+import com.example.tien.Final.repos.PositionRepository;
 import com.example.tien.Final.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,8 @@ public class FileServiceImpl implements FileService {
     private FileReponsitory fileReponsitory;
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private PositionRepository positionRepository;
 
     private final String FILENAME = "D:\\Downloads\\Managerment\\Final\\engineers.txt";
     @Override
@@ -47,10 +51,26 @@ public class FileServiceImpl implements FileService {
         return employees;
     }
 
-    @Override
-    public void save(Employee employee){
+    public void save(Employee employee) {
         employeeRepository.save(employee);
+
     }
+//    @Override
+//    public void save(List<Employee> employees){
+//        for (Employee employee : employees){
+//            String positionId = employee.getPosition().getId();
+//            Position position = positionRepository.findById(positionId);
+//            if(position == null){
+//                position = new Position();
+//                position.setId(positionId);
+//                positionRepository.save(position);
+//            }
+//            employee.setPosition(position.getId());
+//        }
+//        employeeRepository.save(employee);
+//    }
+
+
     @Override
     public List<Employee> readEngineersFromFile(){
         List<Employee> employeeList = new ArrayList<>();
@@ -62,19 +82,21 @@ public class FileServiceImpl implements FileService {
                 String line = scanner.nextLine();
 
                 String[] tokens = line.split(",");
-                Long id = Long.parseLong(tokens[0]);
-                String username = tokens[1];
-                String password = (tokens[2]);
-                String name = tokens[3];
+//                Long id = Long.parseLong(tokens[0]);
+//                String username = tokens[1];
+//                String password = (tokens[2]);
+//                String name = tokens[3];
 
                 Employee employee = new Employee();
-                employee.setUsername(username);
-                employee.setPassword(password);
-                employee.setName(name);
+                employee.setUsername(tokens[1]);
+                employee.setPassword(tokens[2]);
+                employee.setName(tokens[3]);
 
-    //                Position position = new Position();
-    //                position.setId(Long.parseLong(tokens[4]));
-    //                employee.setPosition(position);
+
+                    Position position = new Position();
+                    position.setId(Long.parseLong(tokens[4]));
+                    position.setEmployee(employee);
+                    employee.setPosition(position);
 
                 employeeList.add(employee);
             }
